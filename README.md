@@ -154,5 +154,5 @@ The developer used [Balsamiq](https://balsamiq.com/wireframes/ "Balsamiq Homepag
    * Git was used to utilise the GitPod terminal to allow the developer to commit and push to GitHub.
  * [GitHub](https://github.com/ "Link to GitHub Homepage")
    * GitHub was used to store the project after pushing.
- * [Balsamiq](https://balsamiq.com/ "Link to Balsamiq Homepage)
+ * [Balsamiq](https://balsamiq.com/ "Link to Balsamiq Homepage")
    * Balsamiq was used to create the wireframes during the designing stages of the project.
