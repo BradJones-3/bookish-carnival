@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
     {% block styles %}
     {% endblock %}
-    <title>The MMO Tavern</title>
+    <title class="title">The MMO Tavern</title>
 </head>
 <body>
     
@@ -26,7 +26,7 @@
                     <li><a href="collapsible.html">Add New Term</a></li>
                     <li><a href="mobile.html">Manage Terms</a></li>
                     <li><a href="mobile.html">Log Out</a></li>
-                    <li><a href="mobile.html">Log In</a></li>               
+                    <li><a href="{{ url_for('login') }}">Log In</a></li>               
                     <li><a href="{{ url_for('register') }}">Register</a></li>               
                     <li><a href="mobile.html">Contact Us</a></li>                    
                 </ul>
@@ -40,14 +40,46 @@
             <li><a href="collapsible.html">Add New Term</a></li>
             <li><a href="mobile.html">Manage Terms</a></li>
             <li><a href="mobile.html">Log Out</a></li>
-            <li><a href="mobile.html">Log In</a></li>               
+            <li><a href="{{ url_for('login') }}">Log In</a></li>               
             <li><a href="{{ url_for('register') }}">Register</a></li>               
             <li><a href="mobile.html">Contact Us</a></li>                    
         </ul>
     </header>
 
+    <section>
+        <!-- flash messages appear here -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="row flashes">
+                        <h4 class="brown darken-3 center-align">{{ message }}</h4>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </section>
+
+    <main class="container">
     {% block content %}
     {% endblock %}
+    </main>
+    
+    <footer class="page-footer text-shadow  brown darken-3 ">
+        <div class="footer-copyright ">
+            <div class="container footer-elements valign-wrappe">
+                <div class="row row-footer">
+                    <div class="s12 center-align">
+                        <div class="social">
+                            <a href="https://www.linkedin.com/in/brad-jones-777a99203/"><i
+                                    class="fab fa-linkedin fa-3x footer-icons "></i></a>
+                            <a href="https://github.com/BradJones-3"><i class="fab fa-github fa-3x footer-icons "></i></a>
+                            <a href="/contact_us"><i class="fas fa-envelope-square fa-3x footer-icons "></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>

@@ -27,8 +27,60 @@ def get_terms():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
-    return render_template('register.html')
+    """
+    Register a new user. Username is checked before being 
+    registered to ensure it doesn't already exist in db.
+    If registration is complete
+    the user is logged in.
+    """
+    if request.method == "POST":
+        # checking of users exist in database
+        existing_user = mongo.db.user.find_one(
+            {"username": request.form.get("username").lower()})
 
+        if existing_user:
+            flash("Sorry Username already exist, try again")
+            return render_template("register.html")
+
+        register = {
+            "username": request.form.get("username").lower(),
+            "password": generate_password_hash(request.form.get("password"))
+        }
+        mongo.db.users.insert_one(register)
+
+        # put new user into 'session' cookie
+        session["user"] = request.form.get("username").lower()
+        flash("Thank you! You are now registered")
+        return redirect(url_for("register", username=session["user"]))
+
+    return render_template("register.html")
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        # checks to see if username already exists in the db
+        existing_user = mongo.db.users.find_one(
+            {"username": request.form.get("username").lower()})
+
+        if existing_user:
+            # makes sure hashed password matches users input
+            if check_password_hash(
+                existing_user["password"], request.form.get("password")):
+                    session["user"] = request.form.get("username").lower()
+                    flash("Welcome, {}".format(request.form.get("username")))
+            else:
+                # Passwords do not match
+                flash("Invalid Username and/or Password")
+                return redirect(url_for("login"))
+
+        else:
+            # Username doesn't exist
+            flash("Incorrect Username and/or Password")
+            return redirect(url_for("login"))
+
+
+    return render_template("login.html")
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
