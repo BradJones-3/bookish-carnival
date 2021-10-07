@@ -84,12 +84,24 @@ def login():
     return render_template("login.html")
 
 
+@app.route('/logout')
+def logout():
+    # Logs the user of the session log out of their profile
+    # and redirect the user back to the landing page
+    flash("You have Successfully been logged out")
+    session.pop("user")
+    return redirect(url_for("login"))
+
+
 @app.route("/user-profile/<username>", methods=["GET", "POST"])
 def profile(username):
     # gets the session users username from the database
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
     return render_template("user-profile.html", username=username)
+
+    if session["user"]:
+        return redirect(url_for('login'))
 
 
 if __name__ == "__main__":
