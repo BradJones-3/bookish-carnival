@@ -13,7 +13,20 @@ main {
     line-height: 2;
 }
 
+/* MODAL */
+
+.modal {
+    background-color: #4e342e;
+    color: #d3b300;
+}
+
+.modal-footer,a {
+    background-color: #4e342e;
+    color: #d3b300;
+}
+
 /* NAV BAR */
+
 .sidenav li>a {
     color: #d3b300;
     font-family: "Teko" , sans-serif;
