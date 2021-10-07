@@ -22,7 +22,7 @@
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="fas fa-bars"></i></a>
                 <ul class="right hide-on-med-and-down">
                     <li><a href="{{ url_for('get_terms') }}">Home</a></li>
-                    <li><a href="badges.html">Profile</a></li>
+                    <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
                     <li><a href="collapsible.html">Add New Term</a></li>
                     <li><a href="mobile.html">Manage Terms</a></li>
                     <li><a href="mobile.html">Log Out</a></li>
@@ -36,7 +36,7 @@
         <ul class="sidenav brown darken-4 white-text" id="mobile-demo">
             <li><h4 class="center align">MMO Tavern</h4></li>
             <li><a href="{{ url_for('get_terms') }}">Home</a></li>
-            <li><a href="badges.html">Profile</a></li>
+            <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
             <li><a href="collapsible.html">Add New Term</a></li>
             <li><a href="mobile.html">Manage Terms</a></li>
             <li><a href="mobile.html">Log Out</a></li>
