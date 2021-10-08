@@ -17,18 +17,18 @@ app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
 
-
+# Terms page
 @app.route("/")
 @app.route("/get_terms")
 def get_terms():
     terms = mongo.db.terms.find()
     return render_template("terms.html", terms=terms)
 
-
+# Register page
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """
-    Register a new user. Username is checked before being 
+    Register a new user. Username is checked before being
     registered to ensure it doesn't already exist in db.
     If registration is complete
     the user is logged in.
@@ -54,7 +54,7 @@ def register():
         return redirect(url_for("profile", username=session["user"]))
     return render_template("register.html")
 
-
+# login page
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
@@ -92,7 +92,7 @@ def logout():
     session.pop("user")
     return redirect(url_for("login"))
 
-
+# Profile page
 @app.route("/user-profile/<username>", methods=["GET", "POST"])
 def profile(username):
     # gets the session users username from the database
@@ -102,6 +102,16 @@ def profile(username):
 
     if session["user"]:
         return redirect(url_for('login'))
+
+
+@app.route('/contact')
+def contact():
+    """
+    Contact page to allow anyone to send an email
+    to the developer. Will also send an email to the
+    user to confirm the developer has received theirs.
+    """
+    return render_template("contact.html")
 
 
 if __name__ == "__main__":

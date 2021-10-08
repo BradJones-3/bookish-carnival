@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3 class="center-align">Get In Touch!</h3>
+
+<div class="row contact-form">
+    <form class="col s12">
+        <div class="row">
+            <div class="input-field col s12 center-align">
+                <i class="fas fa-user prefix"></i>
+                <input placeholder="Your Name" name="name" id="name" type="text" class="validate" required>
+                <label for="name">Your Name</label>
+            </div>
+        </div>
+
+        <!-- Users Email Address -->
+        <div class="row">
+            <div class="input-field col s12 center-align">
+                <i class="far fa-envelope prefix"></i>
+                <input id="email" type="email" class="validate" required>
+                <label for="email">Email Address</label>
+            </div>
+        </div>
+
+        <!-- Users Message -->
+        <div class="row center-align">
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-comment-dots prefix"></i>
+                    <textarea id="message" class="materialize-textarea"></textarea>
+                    <label for="message">Enter Your Message Here</label>
+                </div>
+            </div>
+
+            <!-- Send Button -->
+            <button type="submit" value="Submit" name="submit" class="send-btn btn waves-effect waves">
+                <i class="fas fa-share prefix center-align"> Send</i>
+            </button>
+        </div>
+    </form>
+</div>
+
+
+{% endblock %}
