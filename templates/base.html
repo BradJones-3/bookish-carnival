@@ -31,7 +31,7 @@
                         <li><a href="{{ url_for('login') }}">Log In</a></li>               
                         <li><a href="{{ url_for('register') }}">Register</a></li>               
                     {% endif %}
-                    <li><a href="mobile.html">Contact Us</a></li>                    
+                    <li><a href="{{ url_for('contact') }}">Contact Us</a></li>                    
                 </ul>
             </div>
         </nav>
@@ -52,9 +52,9 @@
             <div class="modal-content center-align">
                 <h4>Are you Sure You Want To Log Out</h4>
             </div>
-            <div class="modal-footer center-align">
-                <a href="/logout" class="modal-close waves-effect waves-green btn-flat">Yes</a>
-                <a href="/login" class="modal-close waves-effect waves-green btn-flat">No</a>
+            <div class="modal-footer center-align brown darken-3">
+                <a href="/logout" class="modal-close waves-effect btn">Yes</a>
+                <a href="/get_terms" class="modal-close waves-effect btn">No</a>
             </div>
         </div>
     </header>

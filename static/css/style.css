@@ -25,6 +25,10 @@ main {
 .modal-footer,a {
     color: #d3b300;
 }
+.modal-footer .btn {
+    color: #4e342e;
+    background-color: #d3b300;
+}
 
 /* NAV BAR */
 
