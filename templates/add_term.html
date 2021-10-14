@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <section>
+        <h3 class="center-align">Add Term</h3>
+
+
+
+        <div class="row card-panel">
+            <form class="col s12" method="POST" action="{{ url_for('add_term') }}">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="term_name" name="term_name" type="text"
+                        minlength="2" maxlength="20" class="validate" required>
+                        <label for="term_name">Term Name</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="term_description" name="term_description" type="text"
+                        minlength="10" maxlength="75" class="validate" required>
+                        <label for="term_description">Term Description</label>
+                    </div>
+                </div>
+                <!-- submit new term -->
+                <div class="row center-align">
+                    <div class="col s6 center-align">
+                        <!-- Button to add term to database -->
+                        <button type="submit" class="btn-submit">
+                            Add Term <i class="fas fa-plus-square prefix center-align"></i>
+                        </button>
+                    </div>
+                    <div class="col s6 center-align">
+                        <!-- Button to cancel adding term -->
+                        <button type="submit" class="btn-submit">
+                            Cancel <i class="fas fa-window-close prefix center-align"></i>
+                        </button>
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
+    </section>
+
+
+
+
+
+{% endblock %}
