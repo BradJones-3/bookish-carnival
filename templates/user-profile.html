@@ -1,14 +1,60 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="row">
-    <div class="col s12 m8 offset-m2" >
-        <div class="card-panel brown darken-4">
-            <h3 class="center-align brown darken-4">
-                {{ username }}'s Profile
-            </h3>
+<div class="container">
+
+    <!-- Users Welcome -->
+    <div class="row">
+        <div class="col s12 m8 offset-m2">
+            <div class="card-panel brown darken-4">
+                <h3 class="center-align brown darken-4">
+                    {{ username }}'s Profile
+                </h3>
+                <!-- shows the user how many terms they have created -->
+                <h4 class="center-align">
+                    {{ username|capitalize }} you have added {{ user_number_of_terms }} terms.
+                </h4>
+            </div>
         </div>
+    </div>
+
+    <div class="row">
+        {% for term in terms %}
+            {% if session.user|lower == term.author|lower or session.user|lower == "admin" %}
+            <div class="col s12 m6">
+                <div class="card-panel center-align">
+                    <div><h4 class="center-align">{{ terms.term_title }}</h4></div>
+                    <div><span>Description</span>
+                        {{ terms.term_description }}</div>
+                    <div><span>Author:</span>
+                        {{ terms.author }}</div>
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <div class="center-align">
+        <button type="submit" value="Submit" name="submit" class="send-btn btn waves-effect waves">
+            <i class="fas fa-plus-square prefix center-align"> Add Term </i>
+        </button>
+        <button type="submit" value="Submit" name="submit" class="send-btn btn waves-effect waves">
+            <i class="fas fa-edit prefix center-align"> Edit Term </i>
+        </button>
+        <button type="submit" value="Submit" name="submit" class="send-btn btn waves-effect waves">
+            <i class="fas fa-minus-square prefix center-align"> Delete Term </i>
+        </button>
     </div>
 </div>
 
+        <!-- Modal Structure -->
+        <div id="delete" class="modal" tabindex="0">
+            <div class="modal-content center-align">
+                <h4>Are you Sure You Want To Delete This Term?</h4>
+            </div>
+            <div class="modal-footer center-align brown darken-3">
+                <a href="/logout" class="modal-close waves-effect btn">Yes</a>
+                <a href="/user-profile" class="modal-close waves-effect btn">No</a>
+            </div>
+        </div>
 {% endblock %}

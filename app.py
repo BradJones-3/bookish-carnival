@@ -2,7 +2,7 @@ import os
 from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for)
-from flask_pymongo import PyMongo
+from flask_pymongo import PyMongo, pymongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
 if os.path.exists("env.py"):
@@ -98,10 +98,20 @@ def profile(username):
     # gets the session users username from the database
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
-    return render_template("user-profile.html", username=username)
+    
+    user_terms = mongo.db.terms.find({"author": username})
+    user_number_of_terms = user_terms.count()
+
+
+    # user found and adapted the code for sorting into descending order from https://stackoverflow.com/questions/8109122/how-to-sort-mongodb-with-pymongo
+    terms = user_terms.sort([("_id", pymongo.ASCENDING)])
 
     if session["user"]:
-        return redirect(url_for('login'))
+        return render_template("user-profile.html",
+        username=username, user_number_of_terms=user_number_of_terms,
+        terms=terms)
+
+    return redirect(url_for('login'))
 
 
 @app.route('/contact')

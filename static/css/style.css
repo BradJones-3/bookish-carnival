@@ -32,6 +32,11 @@ main {
 
 /* NAV BAR */
 
+.nav-extended {
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
 .sidenav li>a {
     color: #d3b300;
     font-family: "Teko" , sans-serif;
