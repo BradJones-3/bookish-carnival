@@ -24,8 +24,7 @@
                     <li><a href="{{ url_for('get_terms') }}">Home</a></li>
                     {% if session.user %}
                         <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
-                        <li><a href="collapsible.html">Add New Term</a></li>
-                        <li><a href="mobile.html">Manage Terms</a></li>
+                        <li><a href="{{ url_for('add_term') }}">Add New Term</a></li>
                         <li><a href="#logout" class="modal-trigger">Log Out</a></li>
                     {% else %}
                         <li><a href="{{ url_for('login') }}">Log In</a></li>               
@@ -39,12 +38,14 @@
         <ul class="sidenav brown darken-4" id="mobile-demo">
             <li><h4 class="center-align brown darken-4">MMO Tavern</h4></li>
             <li><a href="{{ url_for('get_terms') }}">Home</a></li>
-            <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
-            <li><a href="collapsible.html">Add New Term</a></li>
-            <li><a href="mobile.html">Manage Terms</a></li>
-            <li><a href="#logout" class="modal-trigger">Log Out</a></li>
-            <li><a href="{{ url_for('login') }}">Log In</a></li>               
-            <li><a href="{{ url_for('register') }}">Register</a></li>               
+            {% if session.user %}
+                <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
+                <li><a href="collapsible.html">Add New Term</a></li>
+                <li><a href="#logout" class="modal-trigger">Log Out</a></li>
+            {% else %}
+                <li><a href="{{ url_for('login') }}">Log In</a></li>               
+                <li><a href="{{ url_for('register') }}">Register</a></li>
+            {% endif %}             
             <li><a href="{{ url_for('contact') }}">Contact Us</a></li>                    
         </ul>
         <!-- Modal Structure -->
@@ -77,23 +78,22 @@
     {% endblock %}
     </main>
     
-    <footer class="page-footer text-shadow  brown darken-3 ">
-        <div class="footer-copyright ">
-            <div class="container footer-elements valign-wrappe">
-                <div class="row row-footer">
-                    <div class="s12 center-align">
-                        <div class="social">
-                            <a href="https://www.linkedin.com/in/brad-jones-777a99203/"><i
-                                    class="fab fa-linkedin fa-3x footer-icons "></i></a>
-                            <a href="https://github.com/BradJones-3"><i class="fab fa-github fa-3x footer-icons "></i></a>
-                            <a href="/contact_us"><i class="fas fa-envelope-square fa-3x footer-icons "></i></a>
-                        </div>
-                    </div>
-                </div>
+    <footer class="page-footer brown darken-3">
+        <div class="container">
+          <div class="row">
+            <div class="s12 center-align">
+              <div class="social">
+                <a href="https://www.linkedin.com/in/brad-jones-777a99203/">
+                  <i class="fab fa-linkedin fa-3x footer-icons "></i></a>
+                <a href="https://github.com/BradJones-3">
+                  <i class="fab fa-github fa-3x footer-icons "></i></a>
+                <a href="/contact_us">
+                <i class="fas fa-envelope-square fa-3x footer-icons "></i></a>
+              </div>
             </div>
+          </div>
         </div>
-    </footer>
-
+      </footer>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

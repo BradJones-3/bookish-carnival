@@ -106,12 +106,68 @@ def profile(username):
     # user found and adapted the code for sorting into descending order from https://stackoverflow.com/questions/8109122/how-to-sort-mongodb-with-pymongo
     terms = user_terms.sort([("_id", pymongo.ASCENDING)])
 
+    number_of_terms = terms.count()
+    user_number_of_terms = mongo.db.terms.count({"author": username})
+
     if session["user"]:
         return render_template("user-profile.html",
-        username=username, user_number_of_terms=user_number_of_terms,
-        terms=terms)
+        username=username, terms=terms,
+        user_number_of_terms=user_number_of_terms,
+        number_of_terms=number_of_terms)
 
     return redirect(url_for('login'))
+
+
+@app.route("/add_term", methods=["GET", "POST"])
+def add_term():
+    # allows users to add terms to the database
+    if request.method == "POST":
+        term = {
+            "title": request.form.get("title"),
+            "description": request.form.get("description"),
+            "author": session["user"]
+        }
+        mongo.db.terms.insert_one(term)
+        flash("Term Successfully Added!")
+        return redirect(url_for("get_terms"))
+    
+    return render_template("add_term.html")
+
+
+@app.route("/edit_term/<term_id>", methods=["GET", "POST"])
+def edit_term(term_id):
+    """
+    allows the author and the
+    admin the choice to edit the term
+    """
+    if request.method == "POST":
+        change = {
+            "title": request.form.get("title"),
+            "description": request.form.get("description"),
+            "author": session["user"]
+        }
+
+        mongo.db.terms.update({"_id": ObjectId}, change)
+        term = mongo.db.terms.find_one({"_id": ObjectId(term_id)})
+        username = mongo.db.term.find_one(
+            {"_id": ObjectId(term_id)})["author"]
+            
+        flash("Term Has Successfully Been Edited")
+        return render_template("one_term.html", term=term, username=username)
+
+    term = mongo.db.terms.find_one({"_id": ObjectId(term_id)})
+    return render_template("edit_term.html", term=term)
+
+
+@app.route("/delete_term/<term_id>")
+def delete_term(term_id):
+    """
+    allows the author or admin to delete terms added to database
+    """
+    mongo.db.terms.remove({"_id": ObjectId(term_id)})
+    flash("Term Deleted Successfully!")
+    return redirect(url_for("get_terms"))
+
 
 
 @app.route('/contact')
