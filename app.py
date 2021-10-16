@@ -140,21 +140,6 @@ def edit_term(term_id):
     allows the author and the
     admin the choice to edit the term
     """
-    if request.method == "POST":
-        change = {
-            "title": request.form.get("title"),
-            "description": request.form.get("description"),
-            "author": session["user"]
-        }
-
-        mongo.db.terms.update({"_id": ObjectId}, change)
-        term = mongo.db.terms.find_one({"_id": ObjectId(term_id)})
-        username = mongo.db.term.find_one(
-            {"_id": ObjectId(term_id)})["author"]
-            
-        flash("Term Has Successfully Been Edited")
-        return render_template("one_term.html", term=term, username=username)
-
     term = mongo.db.terms.find_one({"_id": ObjectId(term_id)})
     return render_template("edit_term.html", term=term)
 
@@ -166,6 +151,7 @@ def delete_term(term_id):
     """
     mongo.db.terms.remove({"_id": ObjectId(term_id)})
     flash("Term Deleted Successfully!")
+    
     return redirect(url_for("get_terms"))
 
 

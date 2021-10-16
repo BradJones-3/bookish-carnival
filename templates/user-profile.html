@@ -35,29 +35,32 @@
                             <a href="{{ url_for('add_term') }}" class="send-btn btn-small waves-effect waves">
                                 <i class="fas fa-plus-square prefix center-align"> Add Term </i>
                             </a>
-                            <button type="submit" value="Submit" name="submit" class="send-btn btn waves-effect waves">
+                            <a href="{{ url_for('edit_term', term_id=term._id) }}" type="submit" value="Submit" name="submit" class="send-btn btn-small waves-effect waves">
                                 <i class="fas fa-edit prefix center-align"> Edit Term </i>
-                            </button>
+                            </a>
                             <!-- Delete Term -->
                             <!-- Modal Trigger -->
-                            <a href="{{ term._id }}" class="btn send-btn modal-trigger">Delete</a>
+                            <a href="#delete-modal" class="send-btn btn-small waves-effect waves">
+                                <i class="fas fa-trash-alt prefix center-align"> Delete</i>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-            
+              <div id="delete-modal" class="modal">
+                  <div class="modal-content">
+                      <h4>Are you sure you want to delete this term?</h4>
+                      <p>This action is final and can not be reversed</p>
+                  </div>
+                  <div class="modal-footer">
+                      <a href="{{ url_for('delete_term', term_id=term._id) }}"
+                          class="modal-close waves-effect waves btn send-btn">Agree</a>
+                        <button class="modal-close waves-effects waves send-btn">Cancel</button>
+                  </div>
+              </div>
             {% endif %}
         {% endfor %}
     </div>
-        <!-- Modal Structure -->
-        <div id="{{ term._id }}" class="modal">
-            <div class="modal-content center-align">
-                <h4>Are you Sure You Want To Delete This Term?</h4>
-                <p>Are you sure you want to delete this term? This process can not be reverted</p>
-            </div>
-            <div class="modal-footer center-align brown darken-3">
-                <a href="{{ url_for('delete_term', term_id=term._id) }}" class="modal-close waves-effect btn">Yes</a>
-                <a href="/get_terms" class="modal-close waves-effect btn">No</a>
-            </div>
-        </div>
+    <!-- Modal Structure -->
+
 {% endblock %}
