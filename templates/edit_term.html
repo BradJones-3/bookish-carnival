@@ -3,23 +3,21 @@
 
     <h3 class="center-align brown darken-3">Edit Term</h3>
 
-
-    {% for term in terms %}
-        <div>
-            <strong>{{ term.term_title }}</strong>
-        </div>
-        <div>
-            <strong>{{ term.term_description }}</strong>
-        </div>
-        <div class="col s6">
-            <a href="" class="btn send-btn"> Confirm Changes</a>
-            <a href="" class="btn send-btn"> Cancel</a>
-        </div>
+    <div class="row">
+        <form action="{{ url_for('edit_term', term_id=term._id) }}">
+            <!-- Term Title -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i></i>
+                    <input id="term_title" name="term_title" minlength="2" maxlength="20"
+                    value="{{ term.term_title }}" type="text" class="validate" required>
+                    <label for="term_title">Term Title</label>
+                </div>
+            </div>
+        </form>
+    </div>
     
     
-    
-    
-    {% endfor %}
 
 
 
