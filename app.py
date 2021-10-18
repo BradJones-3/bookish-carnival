@@ -2,6 +2,7 @@ import os
 from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for)
+import smtplib
 from flask_pymongo import PyMongo, pymongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -13,6 +14,8 @@ app = Flask(__name__)
 
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
+app.config["EMAIL_ADDRESS"] = os.environ.get("EMAIL_ADDRESS")
+app.config["EMAIL_PASS"] = os.environ.get("EMAIL_PASS")
 app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
@@ -163,14 +166,23 @@ def delete_term(term_id):
     return redirect(url_for("all_terms"))
 
 
-
-@app.route('/contact')
+@app.route('/contact', methods=["GET", "POST"])
 def contact():
     """
     Contact page to allow anyone to send an email
     to the developer. Will also send an email to the
     user to confirm the developer has received theirs.
     """
+    name = request.form.get("name")
+    email = request.form.get("email")
+    message = request.form.get("message")
+
+    sent_message = "Thank You For Your Email"
+    server = smtplib.SMTP("smtp.gmail.com", 587)
+    server.starttls()
+    server.login("braadjoness60@gmail.com", os.getenv("EMAIL_PASS"))
+    server.sendmail("braadjoness60@gmail.com", email, sent_message)
+
     return render_template("contact.html")
 
 
