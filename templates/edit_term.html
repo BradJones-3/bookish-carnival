@@ -11,7 +11,7 @@
                     <div class="input-field col s12">
                         <i class="fas fa-heading prefix"></i>
                         <input id="term_title" name="term_title" type="text"
-                        value="{{ term.title }}" minlength="2" maxlength="20" class="validate" required>
+                        value="{{ term.term_title }}" minlength="2" maxlength="20" class="validate" required>
                         <label for="term_title">Term Name</label>
                     </div>
                 </div>
@@ -22,7 +22,7 @@
                             <textarea id="term_description" name="term_description" type="text"
                                 minlength="10" maxlength="150"
                                 class="materialize-textarea validate" required>
-                                {{- term.description -}}
+                                {{- term.term_description -}}
                             </textarea>
                         <label for="term_description">Term Description</label>
                     </div>
@@ -31,13 +31,13 @@
                 <div class="row center-align">
                     <div class="col s6 center-align">
                         <!-- Button to add term to database -->
-                        <button type="submit" class="btn-large send-btn">
+                        <button type="submit" class="btn send-btn">
                             Edit Term <i class="fas fa-plus-square prefix center-align"></i>
                         </button>
                     </div>
                     <div class="col s6 center-align">
                         <!-- Button to cancel adding term -->
-                        <a href="{{ url_for('profile', username=session['user']) }}" class="btn-large send-btn">
+                        <a href="{{ url_for('profile', username=session['user']) }}" class="btn send-btn">
                             Cancel <i class="fas fa-window-close prefix center-align"></i>
                         </a>
                     </div>

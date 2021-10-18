@@ -18,6 +18,12 @@ main {
     line-height: 2;
 }
 
+.main-title {
+    font-weight: 600;
+    margin-top: 55px;
+    background-color: #4e342e;
+}
+
 /* Profile Page*/
 
 .term-card {
@@ -34,6 +40,7 @@ main {
 .profile-term a {
     margin: 5px;
     padding-right: 15px;
+    font-family: "Teko", sans-serif;
 }
 
 /* MODAL */
@@ -41,14 +48,17 @@ main {
 .modal {
     background-color: #4e342e;
     color: #d3b300;
+    font-family: "Teko", sans-serif;
 }
 
 .modal-footer,a {
     color: #d3b300;
+    font-family: "Teko", sans-serif;
 }
 .modal-footer .btn {
     color: #4e342e;
     background-color: #d3b300;
+    font-family: "Teko", sans-serif;
 }
 
 /* NAV BAR */
@@ -99,11 +109,13 @@ main {
 .send-btn {
     background-color: #4e342e;
     color: #d3b300;
+    font-family: "Teko", sans-serif;
 }
 
 .send-btn:hover {
     background-color: #d3b300;
     color: #4e342e;
+    font-family: "Teko", sans-serif;
 }
 
 .input-field .prefix.active {

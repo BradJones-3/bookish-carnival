@@ -24,10 +24,10 @@
             <div class="col s12 offset">
                 <div class="card-panel center-align brown darken-4">
                     <!-- displays the terms tile the user has added -->
-                    <div><h4 class="center-align">{{ term.title }}</h4></div>
+                    <div><h4 class="center-align">{{ term.term_title }}</h4></div>
                     <!-- displays the terms description the user has added -->
                     <div><span>Description</span>
-                        {{ term.description }}</div>
+                        {{ term.term_description }}</div>
                     <!-- displays the accounts name as author  -->
                     <div><span>Author:</span>
                         {{ term.author }}</div>
@@ -38,7 +38,7 @@
                             </a>
                             <!-- Delete Term -->
                             <!-- Modal Trigger -->
-                            <a href="#delete-modal" class="send-btn btn-small waves-effect waves">
+                            <a href="#delete-modal" class="modal-trigger send-btn btn-small waves-effect waves">
                                 <i class="fas fa-trash-alt prefix center-align"> Delete</i>
                             </a>
                         </div>

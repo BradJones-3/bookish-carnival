@@ -1,8 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
+
+    <div class="container">
+    <h4 class="main-title s12 m6 center-align">Welcome the the MMO Tavern!</h4>
     {% for term in terms %}
         {{ term.term_title }}<br>
         {{ term.term_description }}<br>
     {% endfor %}
-
+    </div>
 {% endblock %}

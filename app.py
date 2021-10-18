@@ -20,8 +20,8 @@ mongo = PyMongo(app)
 
 # Terms page
 @app.route("/")
-@app.route("/get_terms")
-def get_terms():
+@app.route("/all_terms")
+def all_terms():
     terms = mongo.db.terms.find()
     return render_template("terms.html", terms=terms)
 
@@ -102,8 +102,6 @@ def profile(username):
     
     user_terms = mongo.db.terms.find({"author": username})
     user_number_of_terms = user_terms.count()
-
-
     # user found and adapted the code for sorting into descending order from https://stackoverflow.com/questions/8109122/how-to-sort-mongodb-with-pymongo
     terms = user_terms.sort([("_id", pymongo.ASCENDING)])
 
@@ -124,16 +122,15 @@ def add_term():
     # allows users to add terms to the database
     if request.method == "POST":
         term = {
-            "title": request.form.get("title"),
-            "description": request.form.get("description"),
+            "term_title": request.form.get("term_title"),
+            "term_description": request.form.get("term_description"),
             "author": session["user"]
         }
         mongo.db.terms.insert_one(term)
         flash("Term Successfully Added!")
-        return redirect(url_for("get_terms"))
+        return redirect(url_for("all_terms"))
 
-    title = mongo.db.terms.find().sort('term_title', 1)
-    return render_template("add_term.html", title=title)
+    return render_template("add_term.html")
 
 
 @app.route("/edit_term/<term_id>", methods=["GET", "POST"])
@@ -142,6 +139,15 @@ def edit_term(term_id):
     allows the author and the
     admin the choice to edit the term
     """
+    if request.method == "POST":
+        change = {
+            "term_title": request.form.get("term_title"),
+            "term_description": request.form.get("term_description"),
+            "author": session["user"]
+        }
+        mongo.db.terms.update({"_id": ObjectId(term_id)}, change)
+        flash("Term Successfully Edited!")
+
     term = mongo.db.terms.find_one({"_id": ObjectId(term_id)})
     return render_template("edit_term.html", term=term)
 
@@ -154,7 +160,7 @@ def delete_term(term_id):
     mongo.db.terms.remove({"_id": ObjectId(term_id)})
     flash("Term Deleted Successfully!")
     
-    return redirect(url_for("get_terms"))
+    return redirect(url_for("all_terms"))
 
 
 
