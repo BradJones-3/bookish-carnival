@@ -17,6 +17,7 @@ app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
 
+
 # Terms page
 @app.route("/")
 @app.route("/get_terms")
@@ -130,8 +131,9 @@ def add_term():
         mongo.db.terms.insert_one(term)
         flash("Term Successfully Added!")
         return redirect(url_for("get_terms"))
-    
-    return render_template("add_term.html")
+
+    title = mongo.db.terms.find().sort('term_title', 1)
+    return render_template("add_term.html", title=title)
 
 
 @app.route("/edit_term/<term_id>", methods=["GET", "POST"])

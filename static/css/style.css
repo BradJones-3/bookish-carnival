@@ -18,6 +18,24 @@ main {
     line-height: 2;
 }
 
+/* Profile Page*/
+
+.term-card {
+    width: 50%;
+    margin-left: auto;
+    left: auto;
+    right: auto;
+}
+
+.profile-card {
+    width: 250px;
+}
+
+.profile-term a {
+    margin: 5px;
+    padding-right: 15px;
+}
+
 /* MODAL */
 
 .modal {
