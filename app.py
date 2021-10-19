@@ -14,12 +14,10 @@ app = Flask(__name__)
 
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
-app.config["EMAIL_ADDRESS"] = os.environ.get("EMAIL_ADDRESS")
 app.config["EMAIL_PASS"] = os.environ.get("EMAIL_PASS")
 app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
-
 
 # Terms page
 @app.route("/")
@@ -166,24 +164,33 @@ def delete_term(term_id):
     return redirect(url_for("all_terms"))
 
 
-@app.route('/contact', methods=["GET", "POST"])
+@app.route('/contact')
 def contact():
     """
-    Contact page to allow anyone to send an email
-    to the developer. Will also send an email to the
-    user to confirm the developer has received theirs.
+    Contact form for the users to send emails to the developer
     """
     name = request.form.get("name")
     email = request.form.get("email")
-    message = request.form.get("message")
-
-    sent_message = "Thank You For Your Email"
-    server = smtplib.SMTP("smtp.gmail.com", 587)
-    server.starttls()
-    server.login("braadjoness60@gmail.com", os.getenv("EMAIL_PASS"))
-    server.sendmail("braadjoness60@gmail.com", email, sent_message)
+    message = request.form.get("message")  
 
     return render_template("contact.html")
+
+
+@app.route("/form", methods=["GET", "POST"])
+def form():
+    """
+    Sends user automated reply when submitting form
+    """
+    email = request.form.get("email")
+    sent_message = "Thank You For Your Email!"
+
+    server = smtplib.SMTP("smtp.gmail.com", 587)
+    server.ehlo()
+    server.starttls()
+    server.ehlo()
+    server.login("braadjoness60@gmail.com", "EMAIL_PASS")
+    server.sendmail("braadjoness60@gmail.com", email, sent_message)
+    server.quit()
 
 
 if __name__ == "__main__":
