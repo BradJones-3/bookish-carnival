@@ -1,20 +1,21 @@
 import os
-from flask import (
-    Flask, flash, render_template,
-    redirect, request, session, url_for)
 import smtplib
-from flask_pymongo import PyMongo, pymongo
-from bson.objectid import ObjectId
-from werkzeug.security import generate_password_hash, check_password_hash
+
 if os.path.exists("env.py"):
     import env
 
+from flask import (
+    Flask, flash, render_template,
+    redirect, request, session, url_for)
+from flask_pymongo import PyMongo, pymongo
+from bson.objectid import ObjectId
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
-app.config["EMAIL_PASS"] = os.environ.get("EMAIL_PASS")
+EMAIL_PASS = str(os.environ.get("EMAIL_PASS"))
 app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
@@ -170,7 +171,7 @@ def contact():
     Contact form for the users to send emails to the developer
     """
     name = request.form.get("name")
-    email = request.form.get("email")
+    email = request.form.get("email_address")
     message = request.form.get("message")  
 
     return render_template("contact.html")
@@ -181,16 +182,21 @@ def form():
     """
     Sends user automated reply when submitting form
     """
-    email = request.form.get("email")
-    sent_message = "Thank You For Your Email!"
+    email = request.form.get("email_address")
+    subject = 'MMO Tavern'
+    body = 'MMO Tavern has recieved your email and will be in touch.'
+    msg = f'Subject:{subject} \n\n {body}'
 
     server = smtplib.SMTP("smtp.gmail.com", 587)
     server.ehlo()
     server.starttls()
     server.ehlo()
-    server.login("braadjoness60@gmail.com", "EMAIL_PASS")
-    server.sendmail("braadjoness60@gmail.com", email, sent_message)
+    server.login("bradcodeproject@gmail.com", EMAIL_PASS)
+    server.sendmail("bradcodeproject@gmail.com", email, msg)
     server.quit()
+
+    flash("Email Successfully Sent!")
+    return redirect((url_for("all_terms")))
 
 
 if __name__ == "__main__":
