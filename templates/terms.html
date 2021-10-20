@@ -3,24 +3,59 @@
 
     <div class="container">
     <h4 class="main-title s12 m6 center-align">Welcome the the MMO Tavern!</h4>
-    {% for term in terms %}
-    <div class="col s8 m6 center-align">
-        <div class="card-panel main-term-card center-align brown darken-4">
-            <div>
-                <h4>{{ term.term_title }}</h4>
+
+    <form action="{{ url_for('search') }}" method="POST" class="col s12 brown darken-4">
+        <div class="row valign-wrapper center-align">
+            <div class="input-field col s12">
+                <i class="fas fa-search prefix"></i>
+                <input type="text" name="term_search" id="term_search" minlength="2" class="validate" required>
+                <label for="term_search">Search For A Term</label>
             </div>
+            <div class="col s12 m4">
+                <button type="submit" class="btn send-btn">
+                <i class="fas fa-search left"></i>Search
+            </button>
+            </div>
+        </div>
+    </form>
+
+    {% if terms|length > 0 %}
+    <div>
+        {% for term in terms %}
+        <div class="col s12 center-align">
+            <div class="card-panel center-align brown darken-4">
                 <div>
-                    <span>Description</span>
+                    <h4>{{ term.term_title }}</h4>
                 </div>
-                <div>
-                    <span>{{ term.term_description }}</span>
-                </div>
-            <!-- displays the author of each term added into the db  -->
-            <div><span>Author:</span>
-                {{ term.author }}</div>
+                    <div>
+                        <span>Description</span>
+                    </div>
+                    <div>
+                        <span>{{ term.term_description }}</span>
+                    </div>
+                <!-- displays the author of each term added into the db  -->
+                <div><span>Author:</span>
+                    {{ term.author }}</div>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="failed-search brown darken-4 center-align">
+            <h4 class="center-align brown darken-4">No Results Found. Want to create this Term?</h4>
+            <!-- if the user is logged in whilst searching a term that doesn't exist in db they will be able to add it -->
+            {% if session.user %}
+            <a href="{{ url_for('add_term') }}" class="btn-large send-btn center-align">
+                Add Term <i class="fas fa-plus-square center-align"></i>
+            </a>
+            <!-- If user is not logged in they must first register an account to add the term -->
+            {% else %}
+            <a href="{{ url_for('register') }}" class="btn-large send-btn center-align">
+                <i class="fas fa-user-plus"></i>Register
+            </a>
+            {% endif %}
         </div>
     </div>
-    {% endfor %}
+    {% endif %}
     </div>
 
 {% endblock %}

@@ -22,8 +22,17 @@ mongo = PyMongo(app)
 @app.route("/")
 @app.route("/all_terms")
 def all_terms():
-    terms = mongo.db.terms.find()
+    terms = list(mongo.db.terms.find())
     return render_template("terms.html", terms=terms)
+
+
+#Search bar
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    query = request.form.get("term_search")
+    terms = list(mongo.db.terms.find({"$text": {"$search": query}}))
+    return render_template("terms.html", terms=terms)
+
 
 # Register page
 @app.route("/register", methods=["GET", "POST"])
