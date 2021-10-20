@@ -45,7 +45,7 @@ def register():
     """
     if request.method == "POST":
         # checking of users exist in database
-        existing_user = mongo.db.user.find_one(
+        existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
 
         if existing_user:
@@ -156,6 +156,7 @@ def edit_term(term_id):
         }
         mongo.db.terms.update({"_id": ObjectId(term_id)}, change)
         flash("Term Successfully Edited!")
+        return redirect(url_for('all_terms'))
 
     term = mongo.db.terms.find_one({"_id": ObjectId(term_id)})
     return render_template("edit_term.html", term=term)
