@@ -243,7 +243,7 @@ Please make sure to add `sudo` if you are not using GitPod
  Go to "Deployment method" and choose "GitHub".  
  Below Deployment method find you repository name listed and select it.  
  6. Still in Heroku go to "Settings" and click "Reveal Config Vars"
- 7. In this section you need to feel in the inputs field with the variables written in the env.py file.  
+ 7. In this section you need to fill in the inputs field with the variables written in the env.py file.  
     - **IP** : 0.0.0.0
     - **PORT** : 5000
     - **MONGO_URI** : `<link to your MongoDB database>`
