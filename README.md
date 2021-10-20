@@ -129,6 +129,8 @@ The developer used [Balsamiq](https://balsamiq.com/wireframes/ "Balsamiq Homepag
 
 ### Colour Scheme
 
+* The colour scheme I opted to use was based on many taverns within the MMO franchise but the colours specifically chosen was from this picture found from a popular game called Hearthstone. ![Hearthstone Box](assets/testing-images/hearthstone.png)
+
 ### Typography
 
 ## Features
@@ -139,20 +141,41 @@ The developer used [Balsamiq](https://balsamiq.com/wireframes/ "Balsamiq Homepag
 
 ### Future Features
 
+* For future features on the website I would like to be able to let people vote on terms to allow other users who visit the website to see what terms are credible.
+* I would like to implement a new webpage one that helps any players visiting the website to look for players to play with on certain games.
+* I would also like to implement that when a user is registering to the website they can use email, this would also allow them to reset their password if forgotten.
+
 ## Issues And Bugs
 
+* When implementing the contact form for the user to email the developer GMail settings for one account I was trying to use wouldn't allow me to link accounts and was blocking any emails from being sent or received. In order to fix this issue i created a new GMail account and allowed 'less secure apps' which would allow the SMTP to send emails to and from the developers email.
+
+* When adding a new term to the db when being redirected back to the homepage of the website the terms just added would show 'None' as both the title and the description. Upon looking back through the form elements I noticed that the id and names was not matching and in turn was not being passed through correctly so in order to fix this issue I renamed all appropriate tags to match one another which allowed the request.form.get() to correctly fetch back the correct data.
 
 ## Technologies Used
 
- * [HTML5](https://en.wikipedia.org/wiki/HTML5 "Link to HTML Wiki")
- * [CSS3](https://en.wikipedia.org/wiki/CSS#CSS_3 "Link to CSS Wiki")
+ * [HTML5](https://en.wikipedia.org/wiki/HTML5 "Link to HTML Wiki") has been used because it is the standard markup language for documents designed to be displayed in a web browser.
+ * [CSS3](https://en.wikipedia.org/wiki/CSS#CSS_3 "Link to CSS Wiki") has been used to style certain aspects of the website.
+ * [Fontawesome](https://fontawesome.com/ "Link to FontAwesome") has been used for the icons used throughout the website.
+ * [Materialize](https://materializecss.com/ "Link to Materialize") version 1.0.0 has been used a modern responsive front-end framework.
+ * [Googlefonts](https://fonts.google.com/) has been used to style the fonts of the writing on the web site. 
  * [Python](https://www.python.org/ "Link to Python")
    * Python was the main language used throughout the project.
  * [Flask](https://en.wikipedia.org/wiki/Flask_(web_framework)"Link to Flask Wiki")
  * [JavaScript](https://en.wikipedia.org/wiki/JavaScript "Link to JavaScript")
+ * [jQuery](https://jquery.com/ "Link to jQuery") has been used to initialize Materialize functionality.
+ * [Jinja](https://jinja.palletsprojects.com/en/2.11.x/ "Link to Jinja") is a modern and designer-friendly templating language for Python3.
+ * [Werkzeug](https://werkzeug.palletsprojects.com/en/1.0.x/ "Link to Werkzeug") Werkzeug is a comprehensive WSGI web application library.
+ * [Mongo DB Atlas](https://account.mongodb.com/ "Link to MongoDB") is a NoSQL database used to store data.
+ * [Pymongo](https://pypi.org/project/pymongo/ "Link to Pymongo") is used to be able to interact with [Mongo DB Atlas](https://account.mongodb.com/) database.
+ * [Heroku](https://www.heroku.com/ "Link to Heroku") is used to deploy and host the project.
  * [Git](https://git-scm.com/ "Link to Git Homepage")
    * Git was used to utilise the GitPod terminal to allow the developer to commit and push to GitHub.
  * [GitHub](https://github.com/ "Link to GitHub Homepage")
    * GitHub was used to store the project after pushing.
  * [Balsamiq](https://balsamiq.com/ "Link to Balsamiq Homepage")
    * Balsamiq was used to create the wireframes during the designing stages of the project.
+
+## Credits
+
+Parts of the '/form' function was taken from codemy.com's youtube series https://www.youtube.com/watch?v=U5MBYN6an70&list=PLCC34OHNcOtqJBOLjXTd5xC0e-VD3siPn&index=9
+Logo for favicon created with https://www.freelogodesign.org/
