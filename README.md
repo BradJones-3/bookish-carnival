@@ -7,7 +7,6 @@
    *  [Development Planes](#Development-Planes)
    * [Design](#Design)
 3. [Features](#Features)
-   * [Design Features](#Design-Features)
    * [Existing Features](#Existing-Features)
    * [Features to Implement in the future](#Features-to-Implement-in-the-future)
 4. [Issues and Bugs](#Issues-and-Bugs)
@@ -20,8 +19,6 @@
    * [Deploying on GitHub Pages](#Deploying-on-GitHub-Pages)
 8. [Credits](#Credits)
    * [Content](#Content)
-   * [Media](#Media)
-   * [Code](#Code)
 9. [Acknowledgements](#Acknowledgements)
 
 # Introduction
@@ -139,7 +136,7 @@ The developer used [Balsamiq](https://balsamiq.com/wireframes/ "Balsamiq Homepag
 
 ## Features
 
-### Design Features
+### Existing Features
 
 * The navbar when viewing the website on smaller devices will be hidden with a slide out sidenav menu when the user presses the menu icon allowing the website not to be cluttered and hard to read. The link will react as to whether the user is logged in on the website or if they are logged out. This is shown by when the user is logged in to the website the links shown to them will be;
  * Home
@@ -155,10 +152,10 @@ The developer used [Balsamiq](https://balsamiq.com/wireframes/ "Balsamiq Homepag
  * Contact Us
 
 * The website is visible on all devices
-
 * The footer holds icons to the developers GitHub and LinkedIn pages with the appropriate icons. It also shows an envelope icon that will direct the user to the Contact Us form.
-
-### Existing Features
+* Upon loading the website the users are met by the "terms.html" page which has a search bar for all the records inside the database allowing them to easily search for the term they are wanting to find. If the user is logged in and searches for a term that doesn't exist yet they will be met by a 'No Results Found' message with a button that takes them to the add term page to allow them to create the term. If the user is logged out and searches for a term that does not yet exist in the database they will be met by the same message but instead the button will now show 'Register' to allow them to create an account and create the new term.
+* Users can easily add new terms by navigating to the 'Add New Term' link in the navbar when logged in.
+* Users logged in can edit and delete terms they have created.
 
 ### Future Features
 
@@ -196,7 +193,70 @@ The developer used [Balsamiq](https://balsamiq.com/wireframes/ "Balsamiq Homepag
  * [Balsamiq](https://balsamiq.com/ "Link to Balsamiq Homepage")
    * Balsamiq was used to create the wireframes during the designing stages of the project.
 
+### Testing.md
+
+For the testing section please refer to [TESTING.md](TESTING.md) file.
+
+### Local deployment
+1. To clone this repository you can do it directly into your IDE by copying the following to your terminal:  
+  `git clone https://github.com/mattyImry/Nonna-s-Kitchen_MS3-Code-Institute `  
+Or you can save a copy of this repository by clicking "Clone or download", then "Download Zip" button, and after extract the Zip file to your folder.
+2. In the terminal window change directory (CD) to the correct file location (directory that you have created for your repository).
+3. Set environment variables:
+* Create `env.py` in the root directory
+* In the `env.py` file at the top write `import os`
+* In the `env.py` set up the connection to your MongoDB database and a "SECRET KEY":  
+`os.environ.setdefault("MONGO_URI", "mongodb+srv:(your logins and password")`
+`os.environ.setdefault["SECRET_KEY"] = "YourSecretKey"`
+4. From the file requirements.txt install the requirements. In your terminal type:  
+`pip3 install -r requirements.txt`  
+Please make sure to add `sudo` if you are not using GitPod  
+`sudo pip3 install -r requirements.txt`
+
+5. Create an account if needed and a database in [Mongo DB Atlas](https://account.mongodb.com/)   
+
+6. In my cluster I have named the database `mmo_DB`
+7. In `mmo_DB` database create 2 collections:  
+ Terms:  
+ `_id: <ObjectId>`  
+ `term_title : <String>`  
+ `term_description : <String>`  
+ users:  
+ `_id: <ObjectId>`
+ `username: <String>`
+ `password: <String>`
+
+ 8. To run the application type in your terminal:  
+ `python3 run.py`
+
+ Now you can start deploying to [Heroku](https://www.heroku.com/).
+
+### Heroku deployment
+
+1. Create a requirement.txt file that is need to Heroku to confirm dependencies. In your terminal please type:  
+`pip3 freeze --local > requirements.txt`
+2. Create a Procfile to confirm to heroku apps the commands that are executed by the app.  
+`echo web: python run.py > Procfile`
+3. Add, commit and push these files to GitHub.
+4. In Heroku create a new app. The name has to be unique.
+5. In Heroku you need to link Github to Heroku via the dashboard link "Deploy".  
+ Go to "Deployment method" and choose "GitHub".  
+ Below Deployment method find you repository name listed and select it.  
+ 6. Still in Heroku go to "Settings" and click "Reveal Config Vars"
+ 7. In this section you need to feel in the inputs field with the variables written in the env.py file.  
+    - **IP** : 0.0.0.0
+    - **PORT** : 5000
+    - **MONGO_URI** : `<link to your MongoDB database>`
+    - **SECRET_KEY** : `<your secret key>`
+    - **MONGO_DBNAME** :`<your collection name>`
+    - **DEBUG**: **FALSE**    
+8. Then enable "Automatic deploys".
+9. In "Manual Deployment" click "Deploy Branch".
+10. You should get the message "Your app is successfully deployed".
+11. Click "View" to lunch the app.
+
 ## Credits
 
-Parts of the '/form' function was taken from codemy.com's youtube series https://www.youtube.com/watch?v=U5MBYN6an70&list=PLCC34OHNcOtqJBOLjXTd5xC0e-VD3siPn&index=9
-Logo for favicon created with https://www.freelogodesign.org/
+* Parts of the '/form' function was taken from codemy.com's youtube series https://www.youtube.com/watch?v=U5MBYN6an70&list=PLCC34OHNcOtqJBOLjXTd5xC0e-VD3siPn&index=9
+* Logo for favicon created with https://www.freelogodesign.org/
+* The if session.user loop on the nav bars was taken from Code Institute Learning Material.

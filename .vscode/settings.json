@@ -28,6 +28,7 @@
       "dbname",
       "mango",
       "minlength",
+      "Procfile",
       "Werkzeug"
    ]
 }
