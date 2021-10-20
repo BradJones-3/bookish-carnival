@@ -131,11 +131,32 @@ The developer used [Balsamiq](https://balsamiq.com/wireframes/ "Balsamiq Homepag
 
 * The colour scheme I opted to use was based on many taverns within the MMO franchise but the colours specifically chosen was from this picture found from a popular game called Hearthstone. ![Hearthstone Box](assets/testing-images/hearthstone.png)
 
+* The colour scheme is consistent throughout the whole website to allow a constant flow for the user.
+
 ### Typography
+
+* The text I used throughout the website was https://fonts.google.com/specimen/Teko with sans serif as a back up should GoogleFonts not be able to connect.
 
 ## Features
 
 ### Design Features
+
+* The navbar when viewing the website on smaller devices will be hidden with a slide out sidenav menu when the user presses the menu icon allowing the website not to be cluttered and hard to read. The link will react as to whether the user is logged in on the website or if they are logged out. This is shown by when the user is logged in to the website the links shown to them will be;
+ * Home
+ * Profile
+ * Add New Term
+ * Log Out
+ * Contact Us
+
+* For users viewing the website when logged out the links shown to those will be;
+ * Home
+ * Log In
+ * Register
+ * Contact Us
+
+* The website is visible on all devices
+
+* The footer holds icons to the developers GitHub and LinkedIn pages with the appropriate icons. It also shows an envelope icon that will direct the user to the Contact Us form.
 
 ### Existing Features
 
