@@ -1,4 +1,4 @@
-# TBC
+# MMO Tavern
 # Table of Contents
 1. [Introduction](#Introduction)
 2. [UX](#UX)
