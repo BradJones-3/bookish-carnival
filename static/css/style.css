@@ -18,6 +18,16 @@ main {
     line-height: 2;
 }
 
+/* Add Term Page*/
+
+.term-panel {
+    border: 3px solid;
+    border-radius: 25px;
+    color: #4e342e;
+    background-color: #2f5186;
+    padding: 10px;
+}
+
 /* All terms */
 
 .main-title {
