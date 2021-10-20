@@ -131,8 +131,8 @@ def add_term():
     # allows users to add terms to the database
     if request.method == "POST":
         term = {
-            "term_title": request.form.get("term_title"),
-            "term_description": request.form.get("term_description"),
+            "term_title": request.form.get("title"),
+            "term_description": request.form.get("description"),
             "author": session["user"]
         }
         mongo.db.terms.insert_one(term)
