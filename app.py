@@ -1,9 +1,7 @@
 import os
 import smtplib
-
 if os.path.exists("env.py"):
     import env
-
 from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for)
@@ -165,15 +163,11 @@ def delete_term(term_id):
     return redirect(url_for("all_terms"))
 
 
-@app.route('/contact')
+@app.route('/contact', methods=["GET", "POST"])
 def contact():
     """
     Contact form for the users to send emails to the developer
-    """
-    name = request.form.get("name")
-    email = request.form.get("email_address")
-    message = request.form.get("message")  
-
+    """      
     return render_template("contact.html")
 
 
@@ -182,7 +176,13 @@ def form():
     """
     Sends user automated reply when submitting form
     """
+    name = request.form.get("name")
+    message = request.form.get("user_message")
     email = request.form.get("email_address")
+
+    subject2 = f'{name} has sent an email from MMO Tavern'
+    body2 = f'{message} \n\n from {email}'
+    msg2 = f'Subject:{subject2} \n\n {body2}'
     subject = 'MMO Tavern'
     body = 'MMO Tavern has recieved your email and will be in touch.'
     msg = f'Subject:{subject} \n\n {body}'
@@ -193,6 +193,7 @@ def form():
     server.ehlo()
     server.login("bradcodeproject@gmail.com", EMAIL_PASS)
     server.sendmail("bradcodeproject@gmail.com", email, msg)
+    server.sendmail(email, "bradcodeproject@gmail.com", msg2)
     server.quit()
 
     flash("Email Successfully Sent!")

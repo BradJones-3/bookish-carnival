@@ -4,8 +4,23 @@
     <div class="container">
     <h4 class="main-title s12 m6 center-align">Welcome the the MMO Tavern!</h4>
     {% for term in terms %}
-        {{ term.term_title }}<br>
-        {{ term.term_description }}<br>
+    <div class="col s8 m6 center-align">
+        <div class="card-panel main-term-card center-align brown darken-4">
+            <div>
+                <h4>{{ term.term_title }}</h4>
+            </div>
+                <div>
+                    <span>Description</span>
+                </div>
+                <div>
+                    <span>{{ term.term_description }}</span>
+                </div>
+            <!-- displays the author of each term added into the db  -->
+            <div><span>Author:</span>
+                {{ term.author }}</div>
+        </div>
+    </div>
     {% endfor %}
     </div>
+
 {% endblock %}

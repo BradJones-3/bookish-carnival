@@ -19,9 +19,19 @@ main {
 }
 
 .main-title {
+    width: 100%;
     font-weight: 600;
+    padding: 12px;
     margin-top: 55px;
     background-color: #4e342e;
+}
+
+/* All terms */
+
+.main-term-card {
+    width: 66%;
+    padding: 15px;
+
 }
 
 /* Profile Page*/
